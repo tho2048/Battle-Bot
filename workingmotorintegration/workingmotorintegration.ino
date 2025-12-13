@@ -38,8 +38,8 @@ const int PWM_RES  = 12;
 const int MAX_DUTY = 4095;
 
 // ================= SPEED =================
-int basePWM = 60;
-#define TURN_PWM 65
+int basePWM = 25;
+#define TURN_PWM 20
 
 // ================= WALL FOLLOW =================
 #define WALL_TARGET_MM 100
@@ -109,10 +109,10 @@ void updateTOF() {
     tofFront.clearInterrupt();
   }
 
-  if (tofRight.dataReady()) {
-    distRight = tofRight.distance();
-    tofRight.clearInterrupt();
-  }
+  // if (tofRight.dataReady()) {
+  //   distRight = tofRight.distance();
+  //   tofRight.clearInterrupt();
+  // }
 }
 
 // ================= TURN (AUTO) =================
@@ -199,7 +199,7 @@ void Forward() {
   digitalWrite(revL, LOW);
   digitalWrite(fwdR, HIGH);
   digitalWrite(revR, LOW);
-  setPWM(100, 100);
+  setPWM(25, 25);
 }
 
 void Backward() {
@@ -317,10 +317,10 @@ void setup() {
   tofFront.begin(0x31, &Wire);
   tofFront.startRanging();
 
-  digitalWrite(XSHUT_RIGHT, HIGH);
-  delay(100);
-  tofRight.begin(0x32, &Wire);
-  tofRight.startRanging();
+  // digitalWrite(XSHUT_RIGHT, HIGH);
+  // delay(100);
+  // tofRight.begin(0x32, &Wire);
+  // tofRight.startRanging();
 
   Serial.println("=== ROBOT READY ===");
 }
